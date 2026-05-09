@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person | Happy Mother's Day</title>
+    <style>
+        :root {
+            --primary: #ff80ab;
+            --dark: #c51162;
+            --bg: #fff5f8;
+            --soft-text: #5d4037;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; 
+            font-family: 'Georgia', serif;
+        }
+
+        /* Floating Petals Effect */
+        .petal {
+            position: absolute;
+            background-color: #ffc1e3;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.6;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* The Responsive Card */
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(255, 128, 171, 0.2);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            width: 360px; 
+            max-width: 90%; 
+            margin: 20px;
+        }
+
+        h1 { 
+            color: var(--dark); 
+            font-size: 1.8rem; 
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .subtitle {
+            display: block;
+            color: var(--primary);
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Photo Frame */
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 15px auto;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.15);
+            overflow: hidden;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 5;
+        }
+
+        #mom-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flower-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+    
+        .special-gif {
+            width: 80px;               /* Increased slightly for better visibility */
+            height: auto;
+            position: absolute;        
+            top: 110px;                /* Adjusted to sit perfectly on top of the photo */
+            left: 50%;                 
+            transform: translateX(-50%); 
+            z-index: 20;               /* Higher than photo-container */
+            pointer-events: none;      
+        }
+
+        #message-display {
+            min-height: 100px;
+            color: var(--soft-text);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            transition: opacity 0.5s ease;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 20px; 
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Segoe UI', sans-serif;
+            box-shadow: 0 4px 15px rgba(255, 128, 171, 0.3);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #music-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            font-size: 0.9rem;
+            box-shadow: none;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 380px) {
+            .card { padding: 1.5rem; }
+            h1 { font-size: 1.5rem; }
+            .photo-container { width: 130px; height: 130px; }
+            .special-gif { top: 100px; width: 70px; }
+            #message-display { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="mothers_day.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <h1>Happy Mother's Day</h1>
+        <span class="subtitle">To my favorite person in the world</span>
+        
+        <!-- GIF is positioned absolutely relative to the card -->
+        <img src="mom.gif" alt="heart gif" class="special-gif">
+        
+        <div class="photo-container">
+            <img src="MAMA.jpg" alt="Mom" id="mom-pic">
+        </div>
+
+        <div class="flower-icon">🌹</div>
+        
+        <p id="message-display">In your arms, I found my first home. In your heart, I found my forever strength.</p>
+        
+        <div class="btn-group">
+            <button onclick="newMessage()">Read My Heart</button>
+            <button id="music-btn" onclick="toggleMusic()">Play Song</button>
+        </div>
+
+        <div class="footer">Love you always</div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const mBtn = document.getElementById('music-btn');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().catch(e => console.log("User must interact first."));
+                mBtn.innerText = "Pause";
+                mBtn.style.background = "#fff0f5";
+            } else {
+                music.pause();
+                mBtn.innerText = "Play";
+                mBtn.style.background = "transparent";
+            }
+        }
+
+        const messages = [
+            "Your love is the softest place I’ve ever known.",
+            "Everything I am, and everything I hope to be, I owe to you.",
+            "Thank you for being the quiet strength that holds my world together.",
+            "Of all the people in the world, my heart will always choose you.",
+            "Your kindness is a melody that my soul never forgets.",
+            "No matter how much I grow, I will always need your gentle heart.",
+            "You aren't just my mother; you are the very best part of my life.",
+            "To the one who loved me before I even took my first breath—thank you.",
+            "You are the light that guides me home, no matter how far I wander."
+        ];
+
+        function newMessage() {
+            const display = document.getElementById('message-display');
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = randomMsg;
+                display.style.opacity = 1;
+            }, 400);
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            petal.style.width = Math.random() * 12 + 8 + 'px';
+            petal.style.height = petal.style.width;
+            document.body.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 7000);
+        }
+
+        setInterval(createPetal, 600);
+    </script>
+</body>
+</html>
